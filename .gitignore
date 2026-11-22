@@ -1,0 +1,11 @@
+bin/
+obj/
+.vs/
+.vscode/
+*.user
+*.suo
+*.log
+TestResults/
+.github/upgrades/
+.env
+.env.*
