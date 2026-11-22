@@ -33,6 +33,13 @@
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 
 ### Step 1: Start Kafka, Kafka UI, and PostgreSQL
+Set the same local-only password and connection string in each terminal you use to run FinBridge. These values are supplied at runtime and are not stored in the repository:
+```bash
+export FINBRIDGE_POSTGRES_PASSWORD='choose-a-local-password'
+export ConnectionStrings__LedgerDb="Host=localhost;Port=5432;Database=finbridge_ledger;Username=finbridge;Password=$FINBRIDGE_POSTGRES_PASSWORD"
+```
+
+Then start the services:
 ```bash
 docker-compose up -d
 ```
@@ -51,11 +58,13 @@ dotnet test FinBridge.sln
 The unit tests run without external services. Integration tests start disposable Kafka and PostgreSQL containers and require Docker Desktop.
 
 ### Step 3: Run the Kafka Sync Worker (Terminal 1)
+In this terminal, set the same two environment variables shown in Step 1 before starting the worker.
 ```bash
 dotnet run --project src/FinBridge.SyncWorker
 ```
 
 ### Step 4: Run the C# MCP Server (Terminal 2)
+In this terminal, set the same two environment variables shown in Step 1 before starting the server.
 ```bash
 dotnet run --project src/FinBridge.McpServer
 ```

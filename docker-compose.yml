@@ -36,7 +36,7 @@ services:
     environment:
       POSTGRES_DB: finbridge_ledger
       POSTGRES_USER: finbridge
-      POSTGRES_PASSWORD: finbridge_dev_password
+      POSTGRES_PASSWORD: ${FINBRIDGE_POSTGRES_PASSWORD:?Set FINBRIDGE_POSTGRES_PASSWORD in your environment}
     volumes:
       - pgdata:/var/lib/postgresql/data
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
